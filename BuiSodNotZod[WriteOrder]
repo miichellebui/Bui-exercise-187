@@ -1,0 +1,60 @@
+package edu.cpt187.bui.exercise6;
+//AUTHOR [Michelle Bui]
+//COURSE CPT187
+//PURPOSE [This represents a receipt which is generated whenever a user makes an order.]
+//STARTDATE [7/22/21]
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class WriteOrder 
+{//start of write order
+	//variables
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	//constructor
+	WriteOrder(String borrowedFileName)
+	{
+		masterFileName = borrowedFileName;
+	}
+	
+	//setters
+	//setWriteOrder to assign borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, and borrowedOrderCost to attribute 
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost)
+	{
+		try 
+		{
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			filePW.printf("%n%d\t%s\t%1.2f\t%d\t%1.2f", borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost); //write order information to file
+			fileFoundFlag = true; //set fileFoundFlag is true
+			filePW.close(); //close print write object
+			recordCount++; //increment record count by 1 
+		} 
+		catch (IOException ex) 
+		{
+			fileFoundFlag = false; //set fileFoundFlag is false
+		}
+	}//end of setWriteOrder to assign a new value to borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, and borrowedOrderCost
+
+	//getters 
+	//getFileFoundFlag to assign fileFoundFlag to attribute 
+	public boolean getFileFoundFlag()
+	{
+		return fileFoundFlag;
+	}//end of getFileFoundFlag to assign to fileFoundFlag	
+		
+	//getFileName to return the value of masterFileName
+	public String getFileName()
+	{
+		return masterFileName;
+	}//end of getFileName for masterFileName
+	
+	//getRecordCount to return the value of recordCount
+	public int getRecordCount()
+	{
+		return recordCount;
+	}//end of getRecordCount for recordCount
+}//end of write order
